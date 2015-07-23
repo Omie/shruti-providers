@@ -7,7 +7,7 @@ import time
 
 from posixpath import join as urljoin
 
-PROVIDER_NAME = "hackernews1"
+PROVIDER_NAME = "hackernews"
 ENDPOINT_REGISTER = "providers"
 ENDPOINT_PUSH = "notifications"
 
@@ -22,7 +22,8 @@ def register(shruti_server):
               "display_name" : "Hacker News",
               "description": "updates around the globe, mostly tech related",
               "web_url": "https://news.ycombinator.com/",
-              "icon_url": "https://news.ycombinator.com/favicon.ico"
+              "icon_url": "https://news.ycombinator.com/favicon.ico",
+              "voice": "Emma"
         }
     _url = urljoin(shruti_server, ENDPOINT_REGISTER, PROVIDER_NAME)
     print _url
@@ -49,7 +50,7 @@ def doWork(shruti_server):
                           "key": PROVIDER_NAME + str(_resp['id']),
                           "priority": 20,
                           "action": 10,
-                          "provider": PROVIDER_NAME
+                          "provider_name": PROVIDER_NAME
                           }
                 r = requests.post(_url, data=json.dumps(_data), headers=headers)
 

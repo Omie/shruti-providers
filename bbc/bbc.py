@@ -22,7 +22,8 @@ def register(shruti_server):
               "display_name" : "BBC",
               "description": "world news headlines from BBC",
               "web_url": "http://bbc.com",
-              "icon_url": "http://static.bbci.co.uk/frameworks/barlesque/2.83.10/desktop/3.5/img/blq-blocks_grey_alpha.png"
+              "icon_url": "http://static.bbci.co.uk/frameworks/barlesque/2.83.10/desktop/3.5/img/blq-blocks_grey_alpha.png",
+              "voice": "Brian"
         }
     _url = urljoin(shruti_server, ENDPOINT_REGISTER, PROVIDER_NAME)
     print _url
@@ -50,7 +51,7 @@ def doWork(shruti_server):
                           "key": PROVIDER_NAME + story_id,
                           "priority": 20,
                           "action": 10,
-                          "provider": PROVIDER_NAME
+                          "provider_name": PROVIDER_NAME
                           }
                 r = requests.post(_url, data=json.dumps(_data), headers=headers)
                 visitedStories[story_id] = True

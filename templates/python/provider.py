@@ -19,7 +19,8 @@ def register(shruti_server):
               "display_name" : "<DISPLAY NAME>",
               "description": "<DESCRIPTION>",
               "web_url": "<URL>",
-              "icon_url": "<URL>"
+              "icon_url": "<URL>",
+              "voice": "<VoiceName>"
         }
     _url = urljoin(shruti_server, ENDPOINT_REGISTER, PROVIDER_NAME)
     print _url
@@ -42,7 +43,7 @@ def doWork(shruti_server):
                   "key": PROVIDER_NAME + "<KEY>",
                   "priority": 20,
                   "action": 10,
-                  "provider": PROVIDER_NAME
+                  "provider_name": PROVIDER_NAME
                   }
         r = requests.post(_url, data=json.dumps(_data), headers=headers)
         visitedStories["<KEY>"] = True

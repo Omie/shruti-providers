@@ -1,0 +1,31 @@
+{
+	"ImportPath": "github.com/omie/shruti-providers",
+	"GoVersion": "go1.4.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/SlyMarbo/rss",
+			"Rev": "7050c40fa5ff70628467713f5ce08892048b0f17"
+		},
+		{
+			"ImportPath": "github.com/axgle/mahonia",
+			"Rev": "5dd783869dfe0a7d5a3049b20b8ae1418c5dcc8a"
+		},
+		{
+			"ImportPath": "github.com/omie/shruti-go",
+			"Rev": "01fe35edab917577e7d7b27f10ede365359515a7"
+		},
+		{
+			"ImportPath": "github.com/parnurzeal/gorequest",
+			"Comment": "v0.2.7",
+			"Rev": "3ac223894abdc1d3f4fb6b196df15c18b0ed4a18"
+		},
+		{
+			"ImportPath": "github.com/peterhellberg/hn",
+			"Rev": "8330ff03440e50cee9281e04475b1fea067560ca"
+		},
+		{
+			"ImportPath": "golang.org/x/net/publicsuffix",
+			"Rev": "6dc0abcce25682504770fa9a7a6705bbfdebfa48"
+		}
+	]
+}

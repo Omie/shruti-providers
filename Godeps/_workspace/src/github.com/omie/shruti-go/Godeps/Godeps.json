@@ -1,0 +1,15 @@
+{
+	"ImportPath": "github.com/omie/shruti-go",
+	"GoVersion": "go1.4.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/parnurzeal/gorequest",
+			"Comment": "v0.2.7",
+			"Rev": "3ac223894abdc1d3f4fb6b196df15c18b0ed4a18"
+		},
+		{
+			"ImportPath": "golang.org/x/net/publicsuffix",
+			"Rev": "6dc0abcce25682504770fa9a7a6705bbfdebfa48"
+		}
+	]
+}

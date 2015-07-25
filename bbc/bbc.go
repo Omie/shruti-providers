@@ -16,7 +16,7 @@ const (
 
 var (
 	sClient shruti.Client
-	visited map[int]bool
+	visited map[string]bool
 )
 
 func Register() (err error) {
@@ -44,6 +44,9 @@ func doWork() (err error) {
 
 	for {
 		for _, item := range feed.Items[:10] {
+			if _, ok := visited[item.ID]; ok {
+				continue
+			}
 			n := shruti.Notification{
 				Title:        item.Title,
 				Url:          item.Link,
@@ -57,6 +60,7 @@ func doWork() (err error) {
 			if err != nil {
 				msg = err.Error()
 			}
+			visited[item.ID] = true
 			log.Println(msg)
 		}
 		log.Println("Sleeping")
@@ -88,6 +92,8 @@ func main() {
 		log.Println(err)
 		return
 	}
+
+	visited = make(map[string]bool)
 
 	err = doWork()
 	if err != nil {

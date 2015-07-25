@@ -46,6 +46,9 @@ func doWork() (err error) {
 
 		for _, id := range ids[:10] {
 			item, err := hn.Item(id)
+			if _, ok := visited[id]; ok {
+				continue
+			}
 			if err == nil {
 				n := shruti.Notification{
 					Title:        item.Title,
@@ -61,10 +64,11 @@ func doWork() (err error) {
 					msg = err.Error()
 				}
 				log.Println(msg)
+				visited[id] = true
 			}
 		}
 		log.Println("Sleeping")
-		time.Sleep(15 * time.Minute)
+		time.Sleep(5 * time.Second)
 		log.Println("woke up")
 	}
 }
@@ -86,6 +90,8 @@ func main() {
 		log.Println(err)
 		return
 	}
+
+	visited = make(map[int]bool)
 
 	err = doWork()
 	if err != nil {

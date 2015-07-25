@@ -68,7 +68,7 @@ func doWork() (err error) {
 			}
 		}
 		log.Println("Sleeping")
-		time.Sleep(5 * time.Second)
+		time.Sleep(5 * time.Minute)
 		log.Println("woke up")
 	}
 }

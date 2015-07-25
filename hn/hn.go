@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	PROVIDER_NAME = "hackernews2"
+	PROVIDER_NAME = "hackernews"
 )
 
 var (

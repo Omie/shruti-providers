@@ -64,7 +64,7 @@ func doWork() (err error) {
 			log.Println(msg)
 		}
 		log.Println("Sleeping")
-		time.Sleep(15 * time.Minute)
+		time.Sleep(30 * time.Minute)
 		log.Println("woke up")
 
 		err = feed.Update()

@@ -4,7 +4,6 @@ import (
 	"log"
 	"os"
 	"strconv"
-	"time"
 
 	shruti "github.com/omie/shruti-go"
 	"github.com/peterhellberg/hn"
@@ -38,39 +37,35 @@ func Register() (err error) {
 func doWork() (err error) {
 	hn := hn.NewClient(nil)
 
-	for {
-		ids, err := hn.TopStories()
-		if err != nil {
-			return err
-		}
-
-		for _, id := range ids[:10] {
-			item, err := hn.Item(id)
-			if _, ok := visited[id]; ok {
-				continue
-			}
-			if err == nil {
-				n := shruti.Notification{
-					Title:        item.Title,
-					Url:          item.URL,
-					Key:          PROVIDER_NAME + strconv.Itoa(item.ID),
-					Priority:     shruti.PRIO_MED,
-					Action:       shruti.ACT_PUSH,
-					ProviderName: PROVIDER_NAME,
-				}
-				err = sClient.PushNotification(n)
-				msg := "submitted"
-				if err != nil {
-					msg = err.Error()
-				}
-				log.Println(msg)
-				visited[id] = true
-			}
-		}
-		log.Println("Sleeping")
-		time.Sleep(5 * time.Minute)
-		log.Println("woke up")
+	ids, err := hn.TopStories()
+	if err != nil {
+		return err
 	}
+
+	for _, id := range ids[:10] {
+		item, err := hn.Item(id)
+		if _, ok := visited[id]; ok {
+			continue
+		}
+		if err == nil {
+			n := shruti.Notification{
+				Title:        item.Title,
+				Url:          item.URL,
+				Key:          PROVIDER_NAME + strconv.Itoa(item.ID),
+				Priority:     shruti.PRIO_MED,
+				Action:       shruti.ACT_PUSH,
+				ProviderName: PROVIDER_NAME,
+			}
+			err = sClient.PushNotification(n)
+			msg := "submitted"
+			if err != nil {
+				msg = err.Error()
+			}
+			log.Println(msg)
+			visited[id] = true
+		}
+	}
+	return nil
 }
 
 func main() {

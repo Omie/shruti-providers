@@ -3,7 +3,6 @@ package main // import "github.com/omie/shruti-providers/bbc"
 import (
 	"log"
 	"os"
-	"time"
 
 	"github.com/SlyMarbo/rss"
 	shruti "github.com/omie/shruti-go"
@@ -42,37 +41,28 @@ func doWork() (err error) {
 		return err
 	}
 
-	for {
-		for _, item := range feed.Items[:10] {
-			if _, ok := visited[item.ID]; ok {
-				continue
-			}
-			n := shruti.Notification{
-				Title:        item.Title,
-				Url:          item.Link,
-				Key:          PROVIDER_NAME + item.ID,
-				Priority:     shruti.PRIO_MED,
-				Action:       shruti.ACT_PUSH,
-				ProviderName: PROVIDER_NAME,
-			}
-			err = sClient.PushNotification(n)
-			msg := "submitted"
-			if err != nil {
-				msg = err.Error()
-			}
-			visited[item.ID] = true
-			log.Println(msg)
+	for _, item := range feed.Items[:10] {
+		if _, ok := visited[item.ID]; ok {
+			continue
 		}
-		log.Println("Sleeping")
-		time.Sleep(30 * time.Minute)
-		log.Println("woke up")
-
-		err = feed.Update()
+		n := shruti.Notification{
+			Title:        item.Title,
+			Url:          item.Link,
+			Key:          PROVIDER_NAME + item.ID,
+			Priority:     shruti.PRIO_MED,
+			Action:       shruti.ACT_PUSH,
+			ProviderName: PROVIDER_NAME,
+		}
+		err = sClient.PushNotification(n)
+		msg := "submitted"
 		if err != nil {
-			return err
+			msg = err.Error()
 		}
-
+		visited[item.ID] = true
+		log.Println(msg)
 	}
+
+	return nil
 }
 
 func main() {
